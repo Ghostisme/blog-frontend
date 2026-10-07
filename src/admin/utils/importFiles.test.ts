@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { MAX_FILE_BYTES, formatBytes, isMarkdownName, rejectReason } from './importFiles'
+import {
+  MAX_FILE_BYTES,
+  MAX_URL_LENGTH,
+  formatBytes,
+  isMarkdownName,
+  parseImportUrls,
+  rejectReason,
+} from './importFiles'
 
 describe('isMarkdownName', () => {
   it('accepts .md and .markdown in any case', () => {
@@ -32,6 +39,23 @@ describe('rejectReason', () => {
 
   it('lets empty files through so the backend can report them per file', () => {
     expect(rejectReason({ name: 'a.md', size: 0 })).toBeNull()
+  })
+})
+
+describe('parseImportUrls', () => {
+  it('splits lines and commas, keeps order, drops duplicates', () => {
+    const { urls, skipped } = parseImportUrls(
+      'https://juejin.cn/post/1\nhttps://juejin.cn/post/2, https://juejin.cn/post/1',
+    )
+    expect(urls).toEqual(['https://juejin.cn/post/1', 'https://juejin.cn/post/2'])
+    expect(skipped).toBe(0)
+  })
+
+  it('skips non-http and oversized lines', () => {
+    const long = `https://example.com/${'a'.repeat(MAX_URL_LENGTH)}`
+    const { urls, skipped } = parseImportUrls('javascript:alert(1)\nftp://x\nnot-a-url\nhttps://ok.com\n' + long)
+    expect(urls).toEqual(['https://ok.com'])
+    expect(skipped).toBe(4)
   })
 })
 

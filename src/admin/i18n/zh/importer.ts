@@ -2,8 +2,16 @@
 export const zhImporter = {
   import: {
     title: '导入文章',
-    subtitle: '批量导入 Markdown 文件，统一进入草稿',
-    notice: '导入的文章一律是草稿，领域和等级由系统按关键词猜测，可能不准。导入后请到“文章管理”批量校正，再统一发布。重复导入同一标题会自动跳过。',
+    subtitle: '粘贴公开文章链接，或上传 Markdown 文件，统一进入草稿',
+    notice: '导入的文章一律是草稿，领域和等级由系统按关键词猜测，可能不准。导入后请到“文章管理”批量校正，再统一发布。重复导入同一标题会自动跳过。登录墙、付费墙或纯前端渲染且无正文的页面会失败。',
+    filesTitle: '上传 Markdown 文件',
+    urlsTitle: '粘贴文章链接',
+    urlsHint: '每行一条 http(s) 链接，也可用逗号分隔。单次最多 {{max}} 条。掘金优先走公开接口，其它站点抓公开 HTML。',
+    urlsPlaceholder: 'https://juejin.cn/post/…',
+    urlsStart: '导入链接（{{count}} 条）',
+    urlsEmpty: '请先粘贴至少一条 http(s) 链接',
+    urlsSkipped: '已忽略 {{count}} 条无效链接（必须是 http/https，且不超过长度限制）',
+    urlsTooMany: '单次最多 {{max}} 条链接，已截取前 {{max}} 条',
     dropTitle: '点击或拖拽 Markdown 文件到此处',
     dropHint: '支持 .md / .markdown，可多选；单次最多 {{max}} 个，单个文件不超过 {{size}}',
     rejectedType: '已忽略 {{count}} 个非 Markdown 文件',
@@ -21,6 +29,6 @@ export const zhImporter = {
     goCorrect: '去文章管理校正草稿',
     total: '文件总数',
     status: { IMPORTED: '已导入', SKIPPED: '已跳过', FAILED: '失败' },
-    col: { file: '文件名', status: '状态', title: '标题', message: '说明' },
+    col: { file: '来源', status: '状态', title: '标题', message: '说明' },
   },
 }

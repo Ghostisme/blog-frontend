@@ -12,6 +12,7 @@ import { BasicsSection } from './BasicsSection'
 import { EducationSection } from './EducationSection'
 import { ExperienceSection } from './ExperienceSection'
 import { ProjectsSection } from './ProjectsSection'
+import { ResumePdfImport } from './ResumePdfImport'
 import { SkillsSection } from './SkillsSection'
 import styles from './resume.module.css'
 
@@ -78,6 +79,15 @@ export function ResumeEditor({ lang, initial, dirty, onEdit, onSaved }: ResumeEd
       onFinish={submit}
       scrollToFirstError
     >
+      <ResumePdfImport
+        dirty={dirty}
+        disabled={save.isPending}
+        onParsed={(content) => {
+          form.setFieldsValue(normalizeResume(content))
+          editSeq.current += 1
+          onEdit()
+        }}
+      />
       <BasicsSection />
       <Section title={t('resume.summary')}>
         <Form.Item name="summary" label={t('resume.summary')} rules={[maxLen(RESUME_LIMITS.summary, t('resume.tooLong'))]}>

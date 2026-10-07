@@ -7,23 +7,26 @@ import { PageHeader } from '../components/common/PageHeader'
 import { Section } from '../components/common/Section'
 import { ImportDropzone } from '../components/import/ImportDropzone'
 import { ImportResultView } from '../components/import/ImportResultView'
+import { ImportUrlBox } from '../components/import/ImportUrlBox'
 import { useErrorToast } from '../hooks/useErrorToast'
-import { useImportArticles } from '../hooks/useImportArticles'
+import { useImportArticleUrls, useImportArticles } from '../hooks/useImportArticles'
 import { MAX_TOTAL_BYTES, formatBytes } from '../utils/importFiles'
 import styles from '../components/import/import.module.css'
 
-/** 批量导入 Markdown：选文件 → 开始导入 → 查看结果 → 去文章管理校正草稿。 */
+/** 导入文章：粘贴公开链接或上传 Markdown，统一进入草稿后再校正发布。 */
 export default function ImportPage() {
   const { t } = useTranslation('admin')
   const toastError = useErrorToast()
   const importer = useImportArticles()
+  const urlImporter = useImportArticleUrls()
   const [fileList, setFileList] = useState<UploadFile[]>([])
   const [result, setResult] = useState<ImportResult | null>(null)
 
   const totalBytes = fileList.reduce((sum, f) => sum + (f.originFileObj?.size ?? f.size ?? 0), 0)
   // 后端整个请求上限 60MB，超出会以 413 整批失败，所以提前拦截
   const tooBig = totalBytes > MAX_TOTAL_BYTES
-  const uploading = importer.isPending
+  // 文件导入和链接导入共用一套结果表，同时点两次会互相覆盖，所以互斥
+  const uploading = importer.isPending || urlImporter.isPending
 
   const start = async () => {
     const files = fileList.flatMap((f) => (f.originFileObj ? [f.originFileObj] : []))
@@ -45,6 +48,11 @@ export default function ImportPage() {
       <PageHeader title={t('import.title')} subtitle={t('import.subtitle')} />
       <Section>
         <Alert type="info" showIcon className={styles.cta} title={t('import.notice')} />
+      </Section>
+      <Section title={t('import.urlsTitle')}>
+        <ImportUrlBox disabled={uploading} importing={urlImporter.isPending} onImport={(urls) => urlImporter.mutateAsync(urls)} onImported={setResult} />
+      </Section>
+      <Section title={t('import.filesTitle')}>
         <Spin spinning={uploading} tip={t('import.uploading')}>
           <ImportDropzone fileList={fileList} onChange={setFileList} disabled={uploading} />
         </Spin>
@@ -61,8 +69,8 @@ export default function ImportPage() {
             type="primary"
             size="large"
             icon={<CloudUploadOutlined />}
-            loading={uploading}
-            disabled={fileList.length === 0 || tooBig}
+            loading={importer.isPending}
+            disabled={fileList.length === 0 || tooBig || uploading}
             onClick={() => void start()}
           >
             {t('import.start', { count: fileList.length })}

@@ -14,3 +14,12 @@ export function useImportArticles() {
     onSuccess: () => invalidateContent(qc),
   })
 }
+
+/** 从公开链接导入。成功后同样让文章列表缓存失效。 */
+export function useImportArticleUrls() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (urls: string[]) => adminApi.importArticleUrls(urls),
+    onSuccess: () => invalidateContent(qc),
+  })
+}

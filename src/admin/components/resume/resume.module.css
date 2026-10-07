@@ -60,3 +60,20 @@
   font-size: 13px;
   color: var(--admin-warn, #d97706);
 }
+
+.pdfImport {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.pdfHint {
+  margin: 0;
+  flex: 1;
+  min-width: 220px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}

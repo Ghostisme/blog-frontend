@@ -56,6 +56,9 @@ export const adminApi = {
     files.forEach((file) => form.append('files', file, file.name))
     return apiPost<ImportResult>('/api/admin/articles/import', form, { timeout: IMPORT_TIMEOUT_MS })
   },
+  /** 从公开链接导入。每条都要出网，超时同样放宽到 5 分钟。 */
+  importArticleUrls: (urls: string[]) =>
+    apiPost<ImportResult>('/api/admin/articles/import-urls', { urls }, { timeout: IMPORT_TIMEOUT_MS }),
 
   // ---- 领域 ----
   listCategories: () => apiGet<CategoryView[]>('/api/admin/categories'),
@@ -73,4 +76,13 @@ export const adminApi = {
   getResume: (lang: ResumeLang) => publicApi.getResume(lang),
   /** 整体覆盖保存，body 必须是完整内容。 */
   saveResume: (lang: ResumeLang, body: ResumeContent) => apiPut<ResumeContent>(`/api/admin/resume/${lang}`, body),
+  /**
+   * 解析简历 PDF，只返回结构化内容，不写入数据库。
+   * 字段名必须是 file（后端 @RequestParam("file")）。
+   */
+  parseResumePdf: (file: File) => {
+    const form = new FormData()
+    form.append('file', file, file.name)
+    return apiPost<ResumeContent>('/api/admin/resume/parse-pdf', form, { timeout: IMPORT_TIMEOUT_MS })
+  },
 }

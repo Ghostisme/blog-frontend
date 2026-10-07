@@ -5,9 +5,18 @@ import type { zhImporter } from '../zh/importer'
 export const enImporter: DeepString<typeof zhImporter> = {
   import: {
     title: 'Import articles',
-    subtitle: 'Import Markdown files in bulk; all of them become drafts',
+    subtitle: 'Paste public article URLs or upload Markdown files; all of them become drafts',
     notice:
-      'Imported articles are always drafts. Topic and level are guessed from keywords and may be wrong. Review them under "Articles" in bulk, then publish together. Re-importing the same title is skipped automatically.',
+      'Imported articles are always drafts. Topic and level are guessed from keywords and may be wrong. Review them under "Articles" in bulk, then publish together. Re-importing the same title is skipped automatically. Login walls, paywalls, or client-rendered pages with no body will fail.',
+    filesTitle: 'Upload Markdown files',
+    urlsTitle: 'Paste article URLs',
+    urlsHint:
+      'One http(s) URL per line, commas also work. Up to {{max}} per request. Juejin uses the public API; other sites are fetched as public HTML.',
+    urlsPlaceholder: 'https://juejin.cn/post/…',
+    urlsStart: 'Import URLs ({{count}})',
+    urlsEmpty: 'Paste at least one http(s) URL first',
+    urlsSkipped: 'Ignored {{count}} invalid URL(s) (must be http/https and within the length limit)',
+    urlsTooMany: 'At most {{max}} URLs per request; kept the first {{max}}',
     dropTitle: 'Click or drag Markdown files here',
     dropHint: '.md / .markdown, multiple files allowed; up to {{max}} per upload, each under {{size}}',
     rejectedType: 'Ignored {{count}} non-Markdown file(s)',
@@ -25,6 +34,6 @@ export const enImporter: DeepString<typeof zhImporter> = {
     goCorrect: 'Review drafts in Articles',
     total: 'Files',
     status: { IMPORTED: 'Imported', SKIPPED: 'Skipped', FAILED: 'Failed' },
-    col: { file: 'File', status: 'Status', title: 'Title', message: 'Note' },
+    col: { file: 'Source', status: 'Status', title: 'Title', message: 'Note' },
   },
 }

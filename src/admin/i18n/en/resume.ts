@@ -15,6 +15,15 @@ export const enResume: DeepString<typeof zhResume> = {
     switchDiscard: 'Discard and switch',
     privacyNotice:
       'The resume page is public. Your email and phone are visible to everyone; leave them empty if you do not want that.',
+    parsePdf: 'Prefill from PDF',
+    parsePdfHint:
+      'Upload a text-layer PDF. The result fills this language’s form and is not saved until you click Save. Scanned PDFs have no text layer and will fail.',
+    parsePdfOk: 'Form filled from the PDF. Review it, then save',
+    parsePdfFailed: 'Could not parse the PDF',
+    parsePdfWrongType: 'Please choose a PDF file',
+    parsePdfTooBig: 'PDF must be under {{size}}',
+    parsePdfDirty: 'This form has unsaved changes. Parsing will replace them',
+    parsePdfDirtyOk: 'Replace and prefill',
     publicField: 'Shown publicly',
     basics: 'Basics',
     name: 'Name',

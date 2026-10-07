@@ -16,6 +16,13 @@ export const useAdminResume = (lang: ResumeLang) =>
     refetchOnMount: 'always',
   })
 
+/** 解析简历 PDF。不写库，所以不失效任何缓存；调用方把结果填进表单后由用户决定是否保存。 */
+export function useParseResumePdf() {
+  return useMutation({
+    mutationFn: (file: File) => adminApi.parseResumePdf(file),
+  })
+}
+
 /** 整体覆盖保存简历，成功后让前台 ['resume', lang] 失效以便访客看到新内容。 */
 export function useSaveResume(lang: ResumeLang) {
   const qc = useQueryClient()
