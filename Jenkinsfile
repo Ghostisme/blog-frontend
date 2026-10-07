@@ -24,6 +24,9 @@
 def nodeRun(String command) {
     withEnv(["BLOG_CMD=${command}"]) {
         sh '''
+            # Jenkins 服务进程的 PATH 和登录 shell 不是同一套，不保证含 /usr/local/bin（系统级 Node 就装在那里）。
+            # 显式补上，不依赖服务的启动环境；放在末尾，不会盖过 nvm 选出的版本
+            export PATH="$PATH:/usr/local/bin"
             export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
             if [ -s "$NVM_DIR/nvm.sh" ]; then
                 . "$NVM_DIR/nvm.sh"
