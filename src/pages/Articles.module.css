@@ -1,0 +1,59 @@
+.page {
+  padding: 40px 0 0;
+}
+
+.head {
+  margin-bottom: 24px;
+}
+
+.head h1 {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.head p {
+  margin-top: 4px;
+  color: var(--text-tertiary);
+}
+
+.summary {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 16px;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  /* 翻页/切换筛选时保留上一页内容直到新数据到达，这里轻微变淡提示“正在更新” */
+  transition: opacity 0.2s;
+}
+
+.grid[data-stale='true'] {
+  opacity: 0.55;
+}
+
+.pager {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding-top: 24px;
+  }
+
+  .head h1 {
+    font-size: 26px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
