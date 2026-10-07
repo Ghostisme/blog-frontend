@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DarkRich 的个人博客：前端、后端、数据库、运维与移动端的工程实践笔记，以及个人简历。" />
+    <title>DarkRich</title>
+    <script>
+      // 在首帧渲染之前确定主题。等 React 挂载后再设置的话，
+      // 深色模式用户会先看到一瞬间的白屏。key 与 theme/ThemeProvider.tsx 保持一致。
+      (function () {
+        try {
+          var stored = localStorage.getItem('blog.theme');
+          var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

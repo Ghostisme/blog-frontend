@@ -1,0 +1,6 @@
+# 统一换行符，不依赖各人机器上的 core.autocrlf 设置。
+# 发布脚本和 Jenkinsfile 在 Linux 服务器上执行，必须是 LF：
+# CRLF 会让 shebang 变成 "/bin/bash^M"，报 bad interpreter，且很难看出原因。
+* text=auto
+Jenkinsfile text eol=lf
+*.sh text eol=lf
