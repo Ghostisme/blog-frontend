@@ -1,0 +1,59 @@
+.toc {
+  max-height: calc(100vh - var(--header-height) - 48px);
+  padding-left: 16px;
+  overflow-y: auto;
+  border-left: 1px solid var(--border);
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+}
+
+.toc ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.toc a {
+  position: relative;
+  display: block;
+  padding: 3px 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.toc a:hover {
+  color: var(--text);
+}
+
+.sub {
+  padding-left: 14px;
+}
+
+/* 当前章节：文字变主色，并在目录左边线上画一段高亮 */
+.toc a.active {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.toc a.active::before {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: -17px;
+  width: 2px;
+  content: '';
+  background: var(--color-primary);
+  border-radius: 1px;
+}

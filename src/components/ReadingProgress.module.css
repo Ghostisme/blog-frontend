@@ -1,0 +1,13 @@
+/* 位于页头正下方；页头吸顶高度即 --header-height */
+.bar {
+  position: fixed;
+  top: var(--header-height);
+  right: 0;
+  left: 0;
+  z-index: 99;
+  height: 3px;
+  background: var(--gradient-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
