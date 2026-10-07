@@ -1,0 +1,197 @@
+.paper {
+  max-width: 860px;
+  padding: 48px 56px;
+  margin: 0 auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.header {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.avatar {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+
+.header h1 {
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.jobTitle {
+  margin-top: 2px;
+  font-size: 17px;
+  color: var(--text-secondary);
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+  padding: 0;
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  list-style: none;
+}
+
+.section {
+  margin-top: 28px;
+}
+
+.section h2 {
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  font-size: 18px;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.summary {
+  color: var(--text-secondary);
+  white-space: pre-line;
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.skills > div {
+  display: flex;
+  gap: 14px;
+}
+
+.skills dt {
+  flex: none;
+  width: 96px;
+  font-weight: 600;
+}
+
+.skills dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.skills dd span {
+  padding: 0 10px;
+  font-size: 13px;
+  line-height: 24px;
+  background: var(--color-primary-soft);
+  border-radius: 6px;
+}
+
+.entry + .entry {
+  margin-top: 18px;
+}
+
+/* 防止打印分页时把一条经历从中间劈开 */
+.entry {
+  break-inside: avoid;
+}
+
+.entryHead {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.entryHead strong {
+  font-size: 16px;
+}
+
+.entryHead span {
+  flex: none;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.desc {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.highlights {
+  padding-left: 1.3em;
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.stack {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.stack em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .paper {
+    padding: 28px 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .skills > div {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* 打印 / 导出 PDF：去掉卡片外观，整页输出纯白底，渐变文字改回实色（渐变文字在部分打印机上会变成空白） */
+@media print {
+  .paper {
+    max-width: none;
+    padding: 0;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .paper,
+  .paper * {
+    color: #111 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .header h1 {
+    background: none !important;
+    -webkit-text-fill-color: #111;
+  }
+
+  .section h2 {
+    color: #3730a3 !important;
+  }
+}
