@@ -1,0 +1,206 @@
+/*
+ * 全局样式与设计变量。
+ * 颜色全部走 CSS 变量，由 <html data-theme="light|dark"> 切换一套取值，
+ * 组件样式里只引用变量，不写死颜色，新增主题或微调色板只改这一个文件。
+ * --color-primary 需与 theme/ThemeProvider.tsx 中的 PRIMARY 保持一致。
+ */
+
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --color-primary: #6366f1;
+  --color-primary-soft: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --gradient-brand: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+
+  /* 文章难度配色：由浅入深对应入门 → 资深 */
+  --level-beginner: #10b981;
+  --level-intermediate: #3b82f6;
+  --level-advanced: #8b5cf6;
+  --level-expert: #f59e0b;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  --header-height: 64px;
+  --content-width: 1200px;
+  --reading-width: 760px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme='light'] {
+  --bg: #f6f7fb;
+  --bg-elevated: #ffffff;
+  --bg-muted: #eef0f6;
+  --text: #1a1d29;
+  --text-secondary: #4b5162;
+  --text-tertiary: #80869a;
+  --border: #e4e7ef;
+  --border-strong: #d2d6e2;
+  --shadow-sm: 0 1px 2px rgba(20, 24, 40, 0.06);
+  --shadow: 0 6px 24px rgba(20, 24, 40, 0.08);
+  --shadow-lg: 0 18px 48px rgba(60, 60, 140, 0.16);
+  --glass: rgba(255, 255, 255, 0.78);
+  --code-bg: #f3f4fa;
+  --code-text: #2b2f3e;
+  --hero-glow-1: rgba(99, 102, 241, 0.22);
+  --hero-glow-2: rgba(6, 182, 212, 0.18);
+}
+
+:root[data-theme='dark'] {
+  --bg: #0b0d14;
+  --bg-elevated: #141723;
+  --bg-muted: #1b1f2e;
+  --text: #e8eaf2;
+  --text-secondary: #b1b6c9;
+  --text-tertiary: #7d8399;
+  --border: #242838;
+  --border-strong: #343a50;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.5);
+  --glass: rgba(20, 23, 35, 0.72);
+  --code-bg: #10131d;
+  --code-text: #d7dbea;
+  --hero-glow-1: rgba(99, 102, 241, 0.28);
+  --hero-glow-2: rgba(6, 182, 212, 0.16);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* 固定头部会遮住锚点目标，给跳转留出头部高度 */
+  scroll-padding-top: calc(var(--header-height) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-primary-soft);
+}
+
+/* 键盘用户需要看得见焦点；鼠标点击不出现（:focus-visible） */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------ 通用工具类 */
+
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.surface {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/*
+ * 响应式断点约定（全站统一，新增样式请沿用）：
+ *   ≥1600  大屏显示器：内容区加宽，文章列表变 4 列，避免两侧留白过多
+ *   1100~  常规桌面/笔记本：内容区 1200
+ *   900~   小笔记本 / iPad 横屏：文章页仍保留右侧目录
+ *   720~   iPad 竖屏：双列卡片，顶部导航仍横排
+ *   <720   手机：导航收进抽屉，单列
+ */
+@media (min-width: 1600px) {
+  :root {
+    --content-width: 1400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* 触屏设备：手指点击需要更大的可点区域（约 44px 是通行的下限），鼠标设备不受影响 */
+@media (pointer: coarse) {
+  button,
+  [role='button'],
+  summary {
+    min-height: 40px;
+  }
+}
+
+/* 尊重系统的“减少动态效果”设置：关掉过渡与平滑滚动 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
