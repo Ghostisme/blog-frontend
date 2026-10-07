@@ -1,0 +1,33 @@
+.footer {
+  margin-top: 80px;
+  padding: 32px 0;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.tagline {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.right {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text-tertiary);
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .right {
+    text-align: left;
+  }
+}
