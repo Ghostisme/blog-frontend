@@ -1,0 +1,83 @@
+/* ---- Markdown 左写右预览 ---- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 两个窗格等高且固定：各自内部滚动，长文章不会把整个页面撑得没法操作保存栏 */
+.pane {
+  height: clamp(380px, 68vh, 760px);
+}
+
+/* 不设 autoSize：textarea 用固定高度 + 原生滚动，输入长文时不会因为反复重算高度而卡顿 */
+.pane textarea {
+  height: 100%;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+  resize: none;
+}
+
+.preview {
+  padding: 16px 20px;
+  overflow: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.previewEmpty {
+  color: var(--text-tertiary);
+}
+
+.previewLoading {
+  display: grid;
+  height: 100%;
+  place-items: center;
+}
+
+.tabs {
+  margin-bottom: 8px;
+}
+
+/* ---- 表单布局 ---- */
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 16px;
+}
+
+.metaLine {
+  margin: -8px 0 16px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+/* 保存栏吸底：长表单滚到任何位置都能直接保存 */
+.actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+}
+
+.actionsSpacer {
+  flex: 1;
+}
+
+.dirtyHint {
+  font-size: 13px;
+  color: var(--admin-warn, #d97706);
+}

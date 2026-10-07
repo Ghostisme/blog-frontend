@@ -1,0 +1,62 @@
+.card {
+  margin-bottom: 12px;
+}
+
+.empty {
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 16px;
+}
+
+.stringList {
+  margin-bottom: 16px;
+}
+
+.stringListHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* 每行：输入框撑满，右侧是上移/下移/删除。顶部对齐，输入框多行时按钮仍在首行位置 */
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.rowInput {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 8px;
+}
+
+.actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+}
+
+.dirtyHint {
+  font-size: 13px;
+  color: var(--admin-warn, #d97706);
+}

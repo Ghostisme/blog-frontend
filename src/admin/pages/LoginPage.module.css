@@ -1,0 +1,87 @@
+.page {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  padding: 24px;
+  place-items: center;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* 两团柔光，复用前台首屏的光晕变量，让后台登录页和站点有同一种气质 */
+.page::before,
+.page::after {
+  position: absolute;
+  z-index: 0;
+  width: 520px;
+  height: 520px;
+  content: '';
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.page::before {
+  top: -160px;
+  left: -120px;
+  background: var(--hero-glow-1);
+}
+
+.page::after {
+  right: -140px;
+  bottom: -180px;
+  background: var(--hero-glow-2);
+}
+
+.prefs {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: 36px 32px 28px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.mark {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 18px;
+  background: var(--gradient-brand);
+  border-radius: 13px;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+.title {
+  font-size: 24px;
+  color: var(--text);
+}
+
+.subtitle {
+  margin: 6px 0 24px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.alert {
+  margin-bottom: 16px;
+}
+
+.back {
+  display: block;
+  margin-top: 16px;
+  font-size: 13px;
+  text-align: center;
+}

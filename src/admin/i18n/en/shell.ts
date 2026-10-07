@@ -1,0 +1,60 @@
+import type { DeepString } from '../types'
+import type { zhShell } from '../zh/shell'
+
+/** Admin shell copy (brand, common words, navigation, login, unsaved-changes prompt). */
+export const enShell: DeepString<typeof zhShell> = {
+  brand: 'Blog Admin',
+  documentTitle: 'Blog Admin',
+  common: {
+    cancel: 'Cancel',
+    delete: 'Delete',
+    edit: 'Edit',
+    save: 'Save',
+    saved: 'Saved',
+    retry: 'Retry',
+    loadFailed: 'Failed to load',
+    loadFailedHint: 'Check your connection and try again',
+    operationFailed: 'Operation failed, please try again later',
+  },
+  status: { DRAFT: 'Draft', PUBLISHED: 'Published' },
+  level: { BEGINNER: 'Beginner', INTERMEDIATE: 'Intermediate', ADVANCED: 'Advanced', EXPERT: 'Expert' },
+  unsaved: {
+    title: 'Unsaved changes',
+    content: 'These changes will be lost if you leave. Leave anyway?',
+    leave: 'Leave',
+    stay: 'Stay',
+  },
+  prefs: {
+    language: 'Interface language',
+    toLight: 'Switch to light mode',
+    toDark: 'Switch to dark mode',
+  },
+  header: { viewSite: 'View site', account: 'Account' },
+  nav: {
+    label: 'Admin navigation',
+    open: 'Open menu',
+    close: 'Close menu',
+    articles: 'Articles',
+    import: 'Import',
+    categories: 'Topics',
+    tags: 'Tags',
+    resume: 'Resume',
+  },
+  auth: {
+    title: 'Admin sign in',
+    subtitle: 'Sign in to manage articles, topics, tags and your resume',
+    username: 'Username',
+    usernameRequired: 'Please enter your username',
+    password: 'Password',
+    passwordRequired: 'Please enter your password',
+    login: 'Sign in',
+    loginFailed: 'Sign in failed, please try again later',
+    backToSite: 'Back to site',
+    logout: 'Sign out',
+    logoutConfirmTitle: 'Sign out?',
+    logoutConfirmContent: 'Unsaved changes on this page will be lost.',
+    logoutFailed: 'Sign out failed, check your connection and try again',
+    sessionExpired: 'Your session has expired, please sign in again',
+    probeFailed: 'Could not verify your sign-in status. Check your connection or try again later',
+  },
+}

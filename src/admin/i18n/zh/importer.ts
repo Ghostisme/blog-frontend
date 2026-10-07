@@ -1,0 +1,26 @@
+/** Markdown 导入页文案。 */
+export const zhImporter = {
+  import: {
+    title: '导入文章',
+    subtitle: '批量导入 Markdown 文件，统一进入草稿',
+    notice: '导入的文章一律是草稿，领域和等级由系统按关键词猜测，可能不准。导入后请到“文章管理”批量校正，再统一发布。重复导入同一标题会自动跳过。',
+    dropTitle: '点击或拖拽 Markdown 文件到此处',
+    dropHint: '支持 .md / .markdown，可多选；单次最多 {{max}} 个，单个文件不超过 {{size}}',
+    rejectedType: '已忽略 {{count}} 个非 Markdown 文件',
+    rejectedSize: '已忽略 {{count}} 个超过 {{size}} 的文件',
+    rejectedCount: '单次最多导入 {{max}} 个文件，多出的已忽略',
+    tooBig: '文件总大小超过 {{size}}，请减少文件数量后分批导入',
+    start: '开始导入（{{count}} 个文件）',
+    clear: '清空列表',
+    totalSize: '合计 {{size}}',
+    uploading: '正在导入，文件较多时需要一些时间，请勿关闭页面…',
+    failed: '导入请求失败，文件列表已保留，可直接重试',
+    resultTitle: '导入结果',
+    successTitle: '成功导入 {{count}} 篇文章',
+    successHint: '它们现在都是草稿。请到文章管理校正领域与等级后再发布。',
+    goCorrect: '去文章管理校正草稿',
+    total: '文件总数',
+    status: { IMPORTED: '已导入', SKIPPED: '已跳过', FAILED: '失败' },
+    col: { file: '文件名', status: '状态', title: '标题', message: '说明' },
+  },
+}

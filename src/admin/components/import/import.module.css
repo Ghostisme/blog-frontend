@@ -1,0 +1,28 @@
+.cta {
+  margin-bottom: 16px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* 失败行整行标红：导入几十个文件时，失败项必须在滚动中一眼可见 */
+.failedRow > td {
+  background: color-mix(in srgb, #ef4444 9%, transparent);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.sizeInfo {
+  color: var(--text-secondary);
+  font-size: 13px;
+}

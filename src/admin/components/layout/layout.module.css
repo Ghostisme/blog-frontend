@@ -1,0 +1,93 @@
+/*
+ * 后台外壳。颜色全部引用 global.css 的变量，深浅色自动跟随。
+ * --admin-warn 定义在 :root 上而不是外壳节点：Modal / Popconfirm / Dropdown 都渲染到 body 下的 portal，
+ * 挂在外壳节点上的变量它们继承不到。变量名带 admin- 前缀，且本文件只随后台分块加载，不会污染前台。
+ */
+:global(:root) {
+  --admin-warn: #d97706;
+}
+
+:global(:root[data-theme='dark']) {
+  --admin-warn: #fbbf24;
+}
+
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.sider {
+  position: sticky;
+  top: 0;
+  flex: 0 0 232px;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+}
+
+/* min-width: 0 必不可少：flex 子项默认 min-width 为内容宽度，不加它宽表格会把整个页面撑出横向滚动条 */
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 16px;
+  background: var(--glass);
+  border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+}
+
+.headerSpacer {
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.brandMark {
+  width: 22px;
+  height: 22px;
+  background: var(--gradient-brand);
+  border-radius: 7px;
+}
+
+@media (max-width: 991px) {
+  .content {
+    padding: 16px;
+  }
+}
+
+/* 窄屏顶栏只留图标，文字标签会挤爆 375px 宽的屏幕 */
+@media (max-width: 575px) {
+  .hideOnMobile {
+    display: none;
+  }
+}
