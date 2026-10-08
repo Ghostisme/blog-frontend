@@ -91,6 +91,7 @@ export const zhCN = {
     newer: '较新的一篇',
     noMore: '没有了',
     backToList: '返回文章列表',
+    translationPending: '英文版本正在处理中，当前显示中文原文。',
   },
   resume: {
     title: '个人简历',

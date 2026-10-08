@@ -1,5 +1,5 @@
 import { keepPreviousData, QueryClient, useQuery } from '@tanstack/react-query'
-import type { ArticleQuery, ResumeLang } from '../types/api'
+import type { ArticleContentLanguage, ArticleQuery, ResumeLang } from '../types/api'
 import { ApiError } from './client'
 import { publicApi } from './public'
 
@@ -28,7 +28,7 @@ export const queryClient = new QueryClient({
 export const queryKeys = {
   filters: ['filters'] as const,
   articles: (q: ArticleQuery) => ['articles', q] as const,
-  article: (slug: string) => ['article', slug] as const,
+  article: (slug: string, lang: ArticleContentLanguage) => ['article', slug, lang] as const,
   resume: (lang: ResumeLang) => ['resume', lang] as const,
 }
 
@@ -42,10 +42,10 @@ export const useArticles = (query: ArticleQuery) =>
     placeholderData: keepPreviousData,
   })
 
-export const useArticle = (slug: string) =>
+export const useArticle = (slug: string, lang: ArticleContentLanguage) =>
   useQuery({
-    queryKey: queryKeys.article(slug),
-    queryFn: () => publicApi.getArticle(slug),
+    queryKey: queryKeys.article(slug, lang),
+    queryFn: () => publicApi.getArticle(slug, lang),
     // 每次读取都会让后端浏览量 +1：不缓存，否则来回切换不会计数；但也不该因为组件重新挂载就多请求
     staleTime: Infinity,
     gcTime: 0,

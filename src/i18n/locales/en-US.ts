@@ -107,6 +107,7 @@ export const enUS: Widen<Messages> = {
     newer: 'Newer',
     noMore: 'Nothing further',
     backToList: 'Back to articles',
+    translationPending: 'The English version is being prepared. The Chinese original is shown for now.',
   },
   resume: {
     title: 'Resume',

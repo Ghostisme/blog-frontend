@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, ClockCircleOutlined, EyeOutlined } from '@ant-design/icons'
-import { Button, Result, Skeleton } from 'antd'
+import { Alert, Button, Result, Skeleton } from 'antd'
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
@@ -32,8 +32,9 @@ function collectHeadings(root: HTMLElement): TocHeading[] {
 
 export default function ArticleDetail() {
   const { slug = '' } = useParams()
-  const { t } = useTranslation()
-  const { data: article, error, isPending, refetch } = useArticle(slug)
+  const { t, i18n } = useTranslation()
+  const contentLanguage = i18n.language.startsWith('zh') ? 'zh' : 'en'
+  const { data: article, error, isPending, refetch } = useArticle(slug, contentLanguage)
 
   if (isPending) {
     return <div className="container" style={{ padding: '48px 0' }}><Skeleton active paragraph={{ rows: 10 }} /></div>
@@ -111,6 +112,14 @@ function ArticleView({ article }: { article: Article }) {
           </header>
 
           <div ref={bodyRef} className={styles.content}>
+            {i18n.language.startsWith('en') && article.contentLanguage === 'zh' && (
+              <Alert
+                type="info"
+                showIcon
+                message={t('article.translationPending')}
+                style={{ marginBottom: 20 }}
+              />
+            )}
             <Suspense fallback={<Skeleton active paragraph={{ rows: 12 }} />}>
               <Markdown content={article.content} onRendered={onRendered} />
             </Suspense>

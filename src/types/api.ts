@@ -23,6 +23,8 @@ export interface PageResult<T> {
 export type ArticleLevel = 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' | 'EXPERT'
 export type ArticleStatus = 'DRAFT' | 'PUBLISHED'
 export type ArticleSort = 'LATEST' | 'HOT' | 'UPDATED'
+export type ArticleContentLanguage = 'zh' | 'en'
+export type TranslationStatus = 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'REVIEW' | 'SKIPPED'
 
 /** 与后端枚举声明顺序一致（入门 → 资深），用于渲染固定顺序的等级入口。 */
 export const ARTICLE_LEVELS: readonly ArticleLevel[] = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'EXPERT']
@@ -57,6 +59,8 @@ export interface ArticleListItem {
   status: ArticleStatus
   publishedAt: string | null
   updatedAt: string
+  contentLanguage?: ArticleContentLanguage
+  translationStatus?: TranslationStatus | null
 }
 
 export interface ArticleNav {
@@ -86,6 +90,8 @@ export interface ArticleDetail {
   older: ArticleNav | null
   /** 时间上更晚的一篇 */
   newer: ArticleNav | null
+  contentLanguage?: ArticleContentLanguage
+  translationStatus?: TranslationStatus | null
 }
 
 export interface CategoryView {
@@ -121,6 +127,7 @@ export interface ArticleQuery {
   tagId?: number
   keyword?: string
   sort?: 'LATEST' | 'HOT'
+  lang?: ArticleContentLanguage
 }
 
 // ---------------------------------------------------------------- 简历
@@ -207,6 +214,12 @@ export interface ArticleEditView {
   publishedAt: string | null
   createdAt: string
   updatedAt: string
+  titleEn?: string | null
+  summaryEn?: string | null
+  contentEn?: string | null
+  translationStatus?: TranslationStatus | null
+  translatedAt?: string | null
+  translationError?: string | null
 }
 
 /** 新增 / 修改文章的请求体。slug 为空：新增时自动生成，修改时保持不变。 */
@@ -272,4 +285,11 @@ export interface ImportResult {
   skipped: number
   failed: number
   items: ImportItem[]
+}
+
+export interface TranslationBatchResult {
+  scanned: number
+  queued: number
+  alreadyTranslated: number
+  locked: number
 }

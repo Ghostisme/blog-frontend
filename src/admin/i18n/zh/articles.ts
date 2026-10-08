@@ -16,6 +16,10 @@ export const zhArticles = {
     searchPlaceholder: '搜索标题、摘要或正文',
     sortLabel: '排序',
     clearFilters: '清除筛选',
+    translation: {
+      backfill: '补齐英文',
+      result: '扫描 {{scanned}} 篇，新增 {{queued}} 个翻译任务，已有 {{alreadyTranslated}} 篇完成，{{locked}} 篇已锁定',
+    },
     sort: { UPDATED: '最近修改', LATEST: '最新发布', HOT: '最多阅读' },
     col: {
       title: '标题',

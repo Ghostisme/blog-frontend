@@ -23,13 +23,13 @@ import styles from './Articles.module.css'
  * 刷新、前进后退、分享链接都能还原同一个结果。
  */
 export default function Articles() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [params, setParams] = useSearchParams()
   const state = useMemo(() => parseFilters(params), [params])
   usePageMeta(`${t('articles.title')} · ${SITE.name}`)
 
   const filters = useFilters()
-  const articles = useArticles(toQuery(state))
+  const articles = useArticles({ ...toQuery(state), lang: i18n.language.startsWith('zh') ? 'zh' : 'en' })
 
   /** 任何筛选条件变化都回到第 1 页：停留在第 5 页却只剩 2 页结果会显示空白。翻页本身例外。 */
   const update = (patch: Partial<FilterState>) => {

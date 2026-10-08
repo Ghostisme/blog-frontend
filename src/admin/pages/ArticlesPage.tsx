@@ -1,4 +1,4 @@
-import { ImportOutlined, PlusOutlined } from '@ant-design/icons'
+import { ImportOutlined, PlusOutlined, TranslationOutlined } from '@ant-design/icons'
 import { App, Button, Table } from 'antd'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,7 @@ import { BatchBar } from '../components/articles/BatchBar'
 import { useArticleColumns } from '../components/articles/useArticleColumns'
 import { PageHeader } from '../components/common/PageHeader'
 import { QueryError } from '../components/common/QueryError'
-import { useAdminArticles, useDeleteArticle } from '../hooks/useArticles'
+import { useAdminArticles, useBackfillTranslations, useDeleteArticle } from '../hooks/useArticles'
 import { useErrorToast } from '../hooks/useErrorToast'
 import { useAdminCategories } from '../hooks/useTaxonomy'
 import {
@@ -33,6 +33,16 @@ export default function ArticlesPage() {
   const articles = useAdminArticles(query)
   const categories = useAdminCategories()
   const deleteArticle = useDeleteArticle()
+  const backfillTranslations = useBackfillTranslations()
+
+  const startBackfill = async () => {
+    try {
+      const result = await backfillTranslations.mutateAsync()
+      void message.success(t('articles.translation.result', { ...result }))
+    } catch (error) {
+      toastError(error)
+    }
+  }
 
   /**
    * 修改查询条件统一走这里：写回 URL，并清空选择。
@@ -83,6 +93,13 @@ export default function ArticlesPage() {
             <Link to="/admin/import">
               <Button icon={<ImportOutlined />}>{t('nav.import')}</Button>
             </Link>
+            <Button
+              icon={<TranslationOutlined />}
+              loading={backfillTranslations.isPending}
+              onClick={() => void startBackfill()}
+            >
+              {t('articles.translation.backfill')}
+            </Button>
             <Link to="/admin/articles/new">
               <Button type="primary" icon={<PlusOutlined />}>
                 {t('articles.create')}

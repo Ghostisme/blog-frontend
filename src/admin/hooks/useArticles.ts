@@ -60,3 +60,12 @@ export function useBatchDeleteArticles() {
     onSuccess: () => invalidateContent(qc),
   })
 }
+
+/** Queue missing/outdated English versions for all existing articles. */
+export function useBackfillTranslations() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: () => adminApi.backfillTranslations(),
+    onSuccess: () => invalidateContent(qc),
+  })
+}

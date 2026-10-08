@@ -1,10 +1,13 @@
 import {
   AppstoreOutlined,
+  ApartmentOutlined,
   CloudOutlined,
   CloudServerOutlined,
   DatabaseOutlined,
   LaptopOutlined,
   MobileOutlined,
+  RobotOutlined,
+  SolutionOutlined,
 } from '@ant-design/icons'
 import type { ReactNode } from 'react'
 
@@ -19,6 +22,11 @@ const ICONS: Record<string, ReactNode> = {
   database: <DatabaseOutlined />,
   cloud: <CloudOutlined />,
   mobile: <MobileOutlined />,
+  apartment: <ApartmentOutlined />,
+  solution: <SolutionOutlined />,
+  robot: <RobotOutlined />,
+  interview: <SolutionOutlined />,
+  agent: <RobotOutlined />,
 }
 
 export function CategoryIcon({ name }: { name: string | null | undefined }) {

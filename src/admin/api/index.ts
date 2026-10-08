@@ -15,6 +15,7 @@ import type {
   ResumeLang,
   TagRequest,
   TagView,
+  TranslationBatchResult,
 } from '../../types/api'
 
 /** 批量导入要逐个文件解析入库，几百个文件会远超 client 默认的 20 秒超时，这里放宽到 5 分钟。 */
@@ -59,6 +60,8 @@ export const adminApi = {
   /** 从公开链接导入。每条都要出网，超时同样放宽到 5 分钟。 */
   importArticleUrls: (urls: string[]) =>
     apiPost<ImportResult>('/api/admin/articles/import-urls', { urls }, { timeout: IMPORT_TIMEOUT_MS }),
+  backfillTranslations: () =>
+    apiPost<TranslationBatchResult>('/api/admin/articles/translations/backfill', {}),
 
   // ---- 领域 ----
   listCategories: () => apiGet<CategoryView[]>('/api/admin/categories'),

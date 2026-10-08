@@ -23,8 +23,9 @@ export default function Home() {
   const localized = useLocalizedName()
   const resume = useResume(toResumeLang(i18n.language))
   const filters = useFilters()
-  const latest = useArticles({ page: 1, size: HOME_LIST_SIZE, sort: 'LATEST' })
-  const popular = useArticles({ page: 1, size: 3, sort: 'HOT' })
+  const contentLanguage = i18n.language.startsWith('zh') ? 'zh' : 'en'
+  const latest = useArticles({ page: 1, size: HOME_LIST_SIZE, sort: 'LATEST', lang: contentLanguage })
+  const popular = useArticles({ page: 1, size: 3, sort: 'HOT', lang: contentLanguage })
 
   const basics = resume.data?.basics
   // 简历还是占位内容(名字为空)时退回站点名，避免首页出现“你好，我是 ”后面空白

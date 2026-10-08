@@ -22,6 +22,10 @@ export const enArticles: DeepString<typeof zhArticles> = {
     searchPlaceholder: 'Search title, summary or content',
     sortLabel: 'Sort',
     clearFilters: 'Clear filters',
+    translation: {
+      backfill: 'Backfill English',
+      result: 'Scanned {{scanned}}, queued {{queued}}, already complete {{alreadyTranslated}}, locked {{locked}}',
+    },
     sort: { UPDATED: 'Recently edited', LATEST: 'Recently published', HOT: 'Most viewed' },
     col: {
       title: 'Title',
