@@ -49,6 +49,11 @@ export const useArticle = (slug: string, lang: ArticleContentLanguage) =>
     // 每次读取都会让后端浏览量 +1：不缓存，否则来回切换不会计数；但也不该因为组件重新挂载就多请求
     staleTime: Infinity,
     gcTime: 0,
+    // 英文任务是后台异步完成的：详情页先展示中文回退时，短轮询让翻译完成后自动切换，
+    // 不需要用户手动刷新。翻译完成后立即停止轮询。
+    refetchInterval: (query) =>
+      lang === 'en' && query.state.data?.contentLanguage === 'zh' ? 5000 : false,
+    refetchIntervalInBackground: false,
   })
 
 export const useResume = (lang: ResumeLang) =>
