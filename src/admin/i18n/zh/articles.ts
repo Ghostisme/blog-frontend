@@ -17,8 +17,9 @@ export const zhArticles = {
     sortLabel: '排序',
     clearFilters: '清除筛选',
     translation: {
-      backfill: '补齐英文',
-      result: '扫描 {{scanned}} 篇，新增 {{queued}} 个翻译任务，已有 {{alreadyTranslated}} 篇完成，{{locked}} 篇已锁定',
+      backfill: '把中文翻译成英文',
+      hint: '直接使用当前中文标题、摘要和正文翻译，不查找外部英文版；点击后由后台自动处理',
+      result: '已扫描 {{scanned}} 篇，加入 {{queued}} 个中文转英文任务，已有 {{alreadyTranslated}} 篇完成，{{locked}} 篇已锁定',
     },
     sort: { UPDATED: '最近修改', LATEST: '最新发布', HOT: '最多阅读' },
     col: {

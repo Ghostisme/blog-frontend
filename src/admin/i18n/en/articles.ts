@@ -23,8 +23,9 @@ export const enArticles: DeepString<typeof zhArticles> = {
     sortLabel: 'Sort',
     clearFilters: 'Clear filters',
     translation: {
-      backfill: 'Backfill English',
-      result: 'Scanned {{scanned}}, queued {{queued}}, already complete {{alreadyTranslated}}, locked {{locked}}',
+      backfill: 'Translate Chinese to English',
+      hint: 'Uses each article\'s current Chinese title, summary, and body; it does not look up an external English version. Processing runs in the background.',
+      result: 'Scanned {{scanned}}, queued {{queued}} Chinese-to-English jobs, already complete {{alreadyTranslated}}, locked {{locked}}',
     },
     sort: { UPDATED: 'Recently edited', LATEST: 'Recently published', HOT: 'Most viewed' },
     col: {

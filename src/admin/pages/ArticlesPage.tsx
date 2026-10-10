@@ -97,6 +97,7 @@ export default function ArticlesPage() {
               icon={<TranslationOutlined />}
               loading={backfillTranslations.isPending}
               onClick={() => void startBackfill()}
+              title={t('articles.translation.hint')}
             >
               {t('articles.translation.backfill')}
             </Button>
