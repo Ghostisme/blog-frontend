@@ -46,14 +46,22 @@
   background: color-mix(in srgb, var(--admin-warn, #d97706) 7%, transparent);
 }
 
+/*
+ * 吸在顶栏（56px）下方：文章列表很长，勾选后操作栏若随页面滚走，就会表现为「勾了没有操作」。
+ * --color-primary-soft 是半透明色，吸顶后会透出下面的表格行，所以用实色底垫着再叠色。
+ * z-index 低于顶栏（20），避免盖住顶栏的下拉菜单。
+ */
 .batchBar {
+  position: sticky;
+  top: 64px;
+  z-index: 10;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
   padding: 10px 14px;
-  background: var(--color-primary-soft);
+  background: linear-gradient(var(--color-primary-soft), var(--color-primary-soft)), var(--bg-elevated);
   border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
   border-radius: var(--radius-sm);
 }
