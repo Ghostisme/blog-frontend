@@ -1,4 +1,5 @@
 import {
+  ApiOutlined,
   AppstoreOutlined,
   ApartmentOutlined,
   CloudOutlined,
@@ -17,6 +18,7 @@ import type { ReactNode } from 'react'
  * 名称与 V2 迁移里的种子数据一致；不认识的名称回退到通用图标。
  */
 const ICONS: Record<string, ReactNode> = {
+  api: <ApiOutlined />,
   laptop: <LaptopOutlined />,
   server: <CloudServerOutlined />,
   database: <DatabaseOutlined />,
