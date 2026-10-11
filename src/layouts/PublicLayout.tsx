@@ -3,6 +3,7 @@ import { Outlet, ScrollRestoration, useNavigation } from 'react-router-dom'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import styles from './PublicLayout.module.css'
+import { AssistantLauncher } from '../assistant/AssistantLauncher'
 
 /**
  * 前台公共外壳：页头 + 内容 + 页脚。
@@ -27,6 +28,7 @@ export default function PublicLayout() {
       </main>
       <Footer />
       <ScrollRestoration />
+      <AssistantLauncher />
     </div>
   )
 }
